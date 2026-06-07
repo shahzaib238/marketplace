@@ -8,11 +8,9 @@ from datetime import datetime
 
 app = FastAPI()
 
-# Templates
 templates = Jinja2Templates(directory="templates")
 
-# File paths
-LISTINGS_FILE = 'listings.json'
+LISTINGS_FILE = '/tmp/listings.json'
 
 if not os.path.exists(LISTINGS_FILE):
     with open(LISTINGS_FILE, 'w') as f:
@@ -30,10 +28,7 @@ def save_listings(listings):
 async def home(request: Request):
     listings = load_listings()
     available = [l for l in listings if l.get('status') == 'available']
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "listings": available
-    })
+    return templates.TemplateResponse("index.html", {"request": request, "listings": available})
 
 @app.post("/add-item")
 async def add_item(
@@ -64,3 +59,6 @@ async def add_item(
 async def get_listings():
     listings = load_listings()
     return [l for l in listings if l.get('status') == 'available']
+
+# This is the critical part for Vercel:
+handler = app

@@ -1,93 +1,374 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Marketplace</title>
+    <title>Marketplace - Buy & Sell Locally</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f5f5f5; }
-        h1 { color: #333; }
-        .form-container, .listings-container { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .item { border-bottom: 1px solid #ddd; padding: 15px 0; }
-        .price { color: #2ecc71; font-size: 20px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ddd; border-radius: 5px; }
-        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        button:hover { background: #0056b3; }
-        .success { color: green; margin-top: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 { font-size: 48px; margin-bottom: 10px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .form-card h2 {
+            margin-bottom: 20px;
+            color: #374151;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover { transform: translateY(-2px); }
+        
+        /* Items Grid */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .item-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        
+        .item-content { padding: 20px; }
+        
+        .item-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+        
+        .item-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 12px;
+        }
+        
+        .item-details {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .seller { font-size: 12px; color: #6b7280; }
+        
+        .contact-btn {
+            background: #10b981;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        .contact-btn:hover { background: #059669; }
+        
+        .phone-link {
+            font-size: 12px;
+            color: #6b7280;
+            text-decoration: none;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 8px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+        }
+        
+        .search-bar input:focus { box-shadow: none; }
+        
+        .filter-select {
+            width: auto;
+            min-width: 120px;
+        }
+        
+        /* Message */
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            text-align: center;
+        }
+        
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #991b1b; }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+        
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #6b7280;
+            background: white;
+            border-radius: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .items-grid { grid-template-columns: 1fr; }
+            .search-bar { flex-direction: column; }
+            .filter-select { width: 100%; }
+        }
     </style>
 </head>
 <body>
-    <h1>🏪 Local Marketplace</h1>
-    
-    <div class="form-container">
-        <h2>📦 Sell an Item</h2>
-        <form id="sellForm">
-            <input type="text" id="title" placeholder="Item name" required>
-            <input type="number" id="price" placeholder="Price (Rs.)" required>
-            <input type="text" id="location" placeholder="Location (e.g., Karachi, Lahore)" required>
-            <input type="text" id="phone" placeholder="Phone number" required>
-            <textarea id="description" placeholder="Description" rows="3"></textarea>
-            <input type="text" id="seller_name" placeholder="Your name" required>
-            <button type="submit">Post Listing</button>
-        </form>
-        <div id="message" class="success"></div>
+    <div class="header">
+        <h1>🏪 Local Marketplace</h1>
+        <p>Buy and sell items in your city — completely free</p>
     </div>
-
-    <div class="listings-container">
-        <h2>🛍️ Items for Sale</h2>
-        <div id="listings">Loading...</div>
+    
+    <div class="container">
+        <!-- Search & Filter Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 Search items..." onkeyup="filterItems()">
+            <select id="categoryFilter" class="filter-select" onchange="filterItems()">
+                <option value="">All Categories</option>
+                <option value="Electronics">📱 Electronics</option>
+                <option value="Furniture">🛋️ Furniture</option>
+                <option value="Clothing">👕 Clothing</option>
+                <option value="Books">📚 Books</option>
+                <option value="Sports">⚽ Sports</option>
+                <option value="Other">📦 Other</option>
+            </select>
+        </div>
+        
+        <!-- Sell Form -->
+        <div class="form-card">
+            <h2>📦 Sell an Item</h2>
+            <form id="sellForm">
+                <div class="form-grid">
+                    <input type="text" id="title" placeholder="Item name *" required>
+                    <input type="number" id="price" placeholder="Price (Rs.) *" required>
+                    <select id="category" required>
+                        <option value="">Select category *</option>
+                        <option value="Electronics">📱 Electronics</option>
+                        <option value="Furniture">🛋️ Furniture</option>
+                        <option value="Clothing">👕 Clothing</option>
+                        <option value="Books">📚 Books</option>
+                        <option value="Sports">⚽ Sports</option>
+                        <option value="Other">📦 Other</option>
+                    </select>
+                    <input type="text" id="location" placeholder="Location *" required>
+                    <input type="text" id="phone" placeholder="Phone number *" required>
+                    <input type="text" id="seller_name" placeholder="Your name *" required>
+                </div>
+                <textarea id="description" placeholder="Description" rows="3" style="margin-top: 15px;"></textarea>
+                <button type="submit" style="margin-top: 20px;">✨ Post Listing</button>
+            </form>
+            <div id="message"></div>
+        </div>
+        
+        <!-- Items List -->
+        <h2 style="margin-bottom: 20px;">🛍️ Recent Listings</h2>
+        <div id="listings" class="items-grid">Loading...</div>
     </div>
 
     <script>
+        let allItems = [];
+        
         async function loadListings() {
             try {
                 const res = await fetch('/api/listings');
-                const items = await res.json();
-                const container = document.getElementById('listings');
-                if (items.length === 0) {
-                    container.innerHTML = '<p>No items yet. Be the first to sell!</p>';
-                    return;
-                }
-                container.innerHTML = items.map(item => `
-                    <div class="item">
-                        <strong style="font-size: 18px;">${escapeHtml(item.title)}</strong><br>
-                        <span class="price">Rs. ${item.price.toLocaleString()}</span><br>
-                        📍 ${escapeHtml(item.location)}<br>
-                        📞 ${escapeHtml(item.phone)}<br>
-                        📝 ${escapeHtml(item.description || 'No description')}<br>
-                        <small>Posted by ${escapeHtml(item.seller_name)} on ${new Date(item.created_at).toLocaleString()}</small>
-                    </div>
-                `).join('');
+                allItems = await res.json();
+                displayItems(allItems);
             } catch (err) {
-                document.getElementById('listings').innerHTML = '<p>Error loading items</p>';
+                document.getElementById('listings').innerHTML = '<div class="no-results">❌ Error loading items</div>';
             }
         }
-
+        
+        function displayItems(items) {
+            const container = document.getElementById('listings');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="no-results">✨ No items found. Be the first to sell!</div>';
+                return;
+            }
+            
+            container.innerHTML = items.map(item => `
+                <div class="item-card">
+                    <div class="item-image">
+                        ${getCategoryIcon(item.category || 'Other')}
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">${escapeHtml(item.title)}</div>
+                        <div class="item-price">Rs. ${Number(item.price).toLocaleString()}</div>
+                        <div class="item-details">
+                            📍 ${escapeHtml(item.location)}<br>
+                            ${escapeHtml(item.description || 'No description')}
+                        </div>
+                        <div class="item-meta">
+                            <span class="seller">👤 ${escapeHtml(item.seller_name)}<br><small>${new Date(item.created_at).toLocaleDateString()}</small></span>
+                            <div>
+                                <button class="contact-btn" onclick="showPhone('${escapeHtml(item.phone)}')">📞 Contact</button>
+                                <a href="https://wa.me/${item.phone.replace(/[^0-9]/g, '')}" target="_blank" class="phone-link" style="display: block; text-align: center; margin-top: 5px;">💬 WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function getCategoryIcon(category) {
+            const icons = {
+                'Electronics': '📱',
+                'Furniture': '🛋️',
+                'Clothing': '👕',
+                'Books': '📚',
+                'Sports': '⚽',
+                'Other': '📦'
+            };
+            return icons[category] || '📦';
+        }
+        
+        function filterItems() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            
+            const filtered = allItems.filter(item => {
+                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
+                                     (item.description && item.description.toLowerCase().includes(searchTerm));
+                const matchesCategory = !category || item.category === category;
+                return matchesSearch && matchesCategory;
+            });
+            
+            displayItems(filtered);
+        }
+        
+        function showPhone(phone) {
+            alert(`📞 Seller's phone: ${phone}\n\nYou can also click WhatsApp to chat directly.`);
+        }
+        
         function escapeHtml(text) {
+            if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
-
+        
         document.getElementById('sellForm').onsubmit = async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = '<div class="message">⏳ Posting...</div>';
+            
             try {
                 const res = await fetch('/add-item', { method: 'POST', body: formData });
                 if (res.ok) {
-                    document.getElementById('message').innerHTML = '✅ Item posted successfully!';
+                    messageDiv.innerHTML = '<div class="message success">✅ Item posted successfully!</div>';
                     e.target.reset();
                     loadListings();
-                    setTimeout(() => {
-                        document.getElementById('message').innerHTML = '';
-                    }, 3000);
+                    setTimeout(() => { messageDiv.innerHTML = ''; }, 3000);
                 } else {
-                    document.getElementById('message').innerHTML = '❌ Error posting item';
+                    messageDiv.innerHTML = '<div class="message error">❌ Error posting item</div>';
                 }
             } catch (err) {
-                document.getElementById('message').innerHTML = '❌ Error posting item';
+                messageDiv.innerHTML = '<div class="message error">❌ Error posting item</div>';
             }
         };
-
+        
         loadListings();
     </script>
 </body>

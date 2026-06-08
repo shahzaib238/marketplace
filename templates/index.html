@@ -14,12 +14,11 @@
 
 <script>
     async function loadMessage() {
-        const res = await fetch("/");
+        const res = await fetch("/api/message");
         const data = await res.json();
         document.getElementById("output").innerText = data.message;
     }
 </script>
-```
 
 </body>
 </html>

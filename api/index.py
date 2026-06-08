@@ -4,6 +4,6 @@ app = FastAPI()
 
 @app.get("/")
 def home():
-return {"message": "Marketplace is working"}
+return {"message": "Marketplace working"}
 
 handler = app

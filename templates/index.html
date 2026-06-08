@@ -12,263 +12,398 @@
             color: #1f2937;
         }
         
-        /* Header */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
         }
         
-        .header h1 { font-size: 48px; margin-bottom: 10px; }
-        .header p { font-size: 18px; opacity: 0.9; }
+        .header h1 { font-size: 40px; margin-bottom: 8px; }
         
-        /* Container */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 24px;
+        }
+        
+        /* Sidebar - My Chats */
+        .sidebar {
+            width: 320px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: calc(100vh - 160px);
+            position: sticky;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .sidebar-header h3 { font-size: 18px; color: #374151; }
+        
+        .chats-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .chat-item {
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+        
+        .chat-item:hover { background: #f3f4f6; }
+        .chat-item.active { background: #eef2ff; border-left: 3px solid #667eea; }
+        
+        .chat-item-title { font-weight: bold; margin-bottom: 4px; }
+        .chat-item-last { font-size: 12px; color: #6b7280; }
+        .chat-item-time { font-size: 10px; color: #9ca3af; }
+        
+        /* Main Content */
+        .main-content { flex: 1; }
+        
+        /* User Bar */
+        .user-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-name { font-weight: bold; color: #374151; }
+        .user-id { font-size: 10px; color: #9ca3af; font-family: monospace; }
+        
+        .new-chat-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
         
         /* Form Card */
         .form-card {
             background: white;
             border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
-        .form-card h2 {
-            margin-bottom: 20px;
-            color: #374151;
-            border-left: 4px solid #667eea;
-            padding-left: 15px;
-        }
-        
+        .form-card h2 { margin-bottom: 16px; color: #374151; }
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
         }
         
         input, textarea, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             border: 1px solid #d1d5db;
             border-radius: 8px;
             font-size: 14px;
-            transition: border-color 0.2s;
         }
         
         input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
         
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
+            font-weight: bold;
         }
-        
-        button:hover { transform: translateY(-2px); }
         
         /* Items Grid */
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         
         .item-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
         }
         
-        .item-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
+        .item-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
         
-        .item-image {
-            width: 100%;
-            height: 200px;
+        .item-icon {
+            height: 120px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-size: 48px;
         }
         
-        .item-content { padding: 20px; }
-        
-        .item-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #1f2937;
-        }
-        
-        .item-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #10b981;
-            margin-bottom: 12px;
-        }
-        
-        .item-details {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        
+        .item-content { padding: 16px; }
+        .item-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+        .item-price { font-size: 22px; font-weight: bold; color: #10b981; margin-bottom: 8px; }
+        .item-details { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
         .item-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 16px;
+            margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid #e5e7eb;
         }
         
-        .seller { font-size: 12px; color: #6b7280; }
-        
-        .contact-btn {
+        .chat-btn {
             background: #10b981;
             padding: 6px 12px;
             font-size: 12px;
         }
         
-        .contact-btn:hover { background: #059669; }
-        
-        .phone-link {
+        .delete-btn {
+            background: #ef4444;
+            padding: 6px 12px;
             font-size: 12px;
-            color: #6b7280;
-            text-decoration: none;
         }
         
-        /* Search Bar */
-        .search-bar {
+        /* Chat Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
             background: white;
-            border-radius: 12px;
-            padding: 8px 16px;
-            margin-bottom: 24px;
+            border-radius: 20px;
+            width: 450px;
+            max-width: 90%;
+            height: 550px;
             display: flex;
-            gap: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-direction: column;
         }
         
-        .search-bar input {
+        .modal-header {
+            padding: 15px 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .modal-body {
             flex: 1;
-            border: none;
-            padding: 12px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9fafb;
         }
         
-        .search-bar input:focus { box-shadow: none; }
-        
-        .filter-select {
-            width: auto;
-            min-width: 120px;
-        }
-        
-        /* Message */
         .message {
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 16px;
-            text-align: center;
+            margin-bottom: 12px;
+            display: flex;
         }
         
-        .success { background: #d1fae5; color: #065f46; }
-        .error { background: #fee2e2; color: #991b1b; }
+        .message-sent { justify-content: flex-end; }
+        .message-received { justify-content: flex-start; }
         
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #6b7280;
+        .message-bubble {
+            max-width: 70%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 14px;
         }
         
-        /* No results */
-        .no-results {
-            text-align: center;
-            padding: 60px;
-            color: #6b7280;
+        .message-sent .message-bubble {
+            background: #667eea;
+            color: white;
+        }
+        
+        .message-received .message-bubble {
             background: white;
-            border-radius: 16px;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
         }
         
-        @media (max-width: 768px) {
-            .header h1 { font-size: 32px; }
-            .items-grid { grid-template-columns: 1fr; }
-            .search-bar { flex-direction: column; }
-            .filter-select { width: 100%; }
+        .message-time { font-size: 10px; margin-top: 4px; opacity: 0.7; }
+        
+        .modal-footer {
+            padding: 15px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .modal-footer input {
+            flex: 1;
+            margin: 0;
+        }
+        
+        .close { cursor: pointer; font-size: 24px; }
+        
+        .message-status { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+        
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            .chats-list { max-height: 300px; }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🏪 Local Marketplace</h1>
-        <p>Buy and sell items in your city — completely free</p>
+        <p>Buy, sell, and chat — items stay forever until you remove them</p>
     </div>
     
     <div class="container">
-        <!-- Search & Filter Bar -->
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="🔍 Search items..." onkeyup="filterItems()">
-            <select id="categoryFilter" class="filter-select" onchange="filterItems()">
-                <option value="">All Categories</option>
-                <option value="Electronics">📱 Electronics</option>
-                <option value="Furniture">🛋️ Furniture</option>
-                <option value="Clothing">👕 Clothing</option>
-                <option value="Books">📚 Books</option>
-                <option value="Sports">⚽ Sports</option>
-                <option value="Other">📦 Other</option>
-            </select>
+        <!-- Sidebar: My Chats -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>💬 My Conversations</h3>
+            </div>
+            <div class="chats-list" id="chatsList">
+                <div style="text-align: center; padding: 20px; color: #9ca3af;">No chats yet.<br>Message a seller to start!</div>
+            </div>
         </div>
         
-        <!-- Sell Form -->
-        <div class="form-card">
-            <h2>📦 Sell an Item</h2>
-            <form id="sellForm">
-                <div class="form-grid">
-                    <input type="text" id="title" placeholder="Item name *" required>
-                    <input type="number" id="price" placeholder="Price (Rs.) *" required>
-                    <select id="category" required>
-                        <option value="">Select category *</option>
-                        <option value="Electronics">📱 Electronics</option>
-                        <option value="Furniture">🛋️ Furniture</option>
-                        <option value="Clothing">👕 Clothing</option>
-                        <option value="Books">📚 Books</option>
-                        <option value="Sports">⚽ Sports</option>
-                        <option value="Other">📦 Other</option>
-                    </select>
-                    <input type="text" id="location" placeholder="Location *" required>
-                    <input type="text" id="phone" placeholder="Phone number *" required>
-                    <input type="text" id="seller_name" placeholder="Your name *" required>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- User Info Bar -->
+            <div class="user-bar">
+                <div class="user-info">
+                    <span>👤</span>
+                    <input type="text" id="userName" placeholder="Your name" value="Guest" style="width: 150px; margin: 0;">
+                    <span class="user-id" id="userIdDisplay"></span>
                 </div>
-                <textarea id="description" placeholder="Description" rows="3" style="margin-top: 15px;"></textarea>
-                <button type="submit" style="margin-top: 20px;">✨ Post Listing</button>
-            </form>
-            <div id="message"></div>
+                <button class="new-chat-btn" onclick="showNewChatModal()">➕ New Chat</button>
+            </div>
+            
+            <!-- Sell Form -->
+            <div class="form-card">
+                <h2>📦 Sell an Item</h2>
+                <form id="sellForm">
+                    <div class="form-grid">
+                        <input type="text" id="title" placeholder="Item name *" required>
+                        <input type="number" id="price" placeholder="Price (Rs.) *" required>
+                        <select id="category" required>
+                            <option value="">Category *</option>
+                            <option value="Electronics">📱 Electronics</option>
+                            <option value="Furniture">🛋️ Furniture</option>
+                            <option value="Clothing">👕 Clothing</option>
+                            <option value="Books">📚 Books</option>
+                            <option value="Sports">⚽ Sports</option>
+                            <option value="Other">📦 Other</option>
+                        </select>
+                        <input type="text" id="location" placeholder="Location *" required>
+                        <input type="text" id="phone" placeholder="Phone number *" required>
+                        <input type="text" id="seller_name" placeholder="Your name *" required>
+                    </div>
+                    <textarea id="description" placeholder="Description" rows="2" style="margin-top: 12px;"></textarea>
+                    <button type="submit" style="margin-top: 16px;">✨ Post Listing (stays forever)</button>
+                </form>
+                <div id="message" style="margin-top: 12px;"></div>
+            </div>
+            
+            <!-- Items List -->
+            <h2 style="margin-bottom: 16px;">🛍️ Items for Sale</h2>
+            <div id="listings" class="items-grid">Loading...</div>
         </div>
-        
-        <!-- Items List -->
-        <h2 style="margin-bottom: 20px;">🛍️ Recent Listings</h2>
-        <div id="listings" class="items-grid">Loading...</div>
+    </div>
+    
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="chatTitle">Chat</span>
+                <span class="close" onclick="closeChatModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="chatMessages"></div>
+            <div class="modal-footer">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Chat Modal -->
+    <div id="newChatModal" class="modal">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header">
+                <span>Start a Conversation</span>
+                <span class="close" onclick="closeNewChatModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Select an item to chat about:</p>
+                <div id="itemsForChat" style="max-height: 400px; overflow-y: auto;"></div>
+            </div>
+        </div>
     </div>
 
     <script>
+        let currentUser = {
+            id: localStorage.getItem('userId') || 'user_' + Math.random().toString(36).substr(2, 8),
+            name: localStorage.getItem('userName') || 'Guest'
+        };
+        
+        let currentChat = null;
         let allItems = [];
+        let myChats = {};
+        
+        function saveUser() {
+            localStorage.setItem('userId', currentUser.id);
+            localStorage.setItem('userName', currentUser.name);
+            document.getElementById('userIdDisplay').innerText = currentUser.id;
+        }
+        
+        document.getElementById('userName').onchange = () => {
+            currentUser.name = document.getElementById('userName').value || 'Guest';
+            saveUser();
+            loadMyChats();
+        };
+        
+        document.getElementById('userName').value = currentUser.name;
+        saveUser();
         
         async function loadListings() {
             try {
@@ -276,100 +411,196 @@
                 allItems = await res.json();
                 displayItems(allItems);
             } catch (err) {
-                document.getElementById('listings').innerHTML = '<div class="no-results">❌ Error loading items</div>';
+                document.getElementById('listings').innerHTML = '<div style="text-align:center; padding:40px;">Error loading items</div>';
             }
         }
         
         function displayItems(items) {
             const container = document.getElementById('listings');
             if (items.length === 0) {
-                container.innerHTML = '<div class="no-results">✨ No items found. Be the first to sell!</div>';
+                container.innerHTML = '<div style="text-align:center; padding:60px; background:white; border-radius:16px;">✨ No items yet. Be the first to sell!</div>';
                 return;
             }
             
             container.innerHTML = items.map(item => `
                 <div class="item-card">
-                    <div class="item-image">
-                        ${getCategoryIcon(item.category || 'Other')}
-                    </div>
+                    <div class="item-icon">${getIcon(item.category)}</div>
                     <div class="item-content">
                         <div class="item-title">${escapeHtml(item.title)}</div>
                         <div class="item-price">Rs. ${Number(item.price).toLocaleString()}</div>
-                        <div class="item-details">
-                            📍 ${escapeHtml(item.location)}<br>
-                            ${escapeHtml(item.description || 'No description')}
-                        </div>
+                        <div class="item-details">📍 ${escapeHtml(item.location)}<br>📁 ${item.category}</div>
+                        <div class="item-details" style="font-size:12px;">👤 ${escapeHtml(item.seller_name)}<br>🕒 ${new Date(item.created_at).toLocaleDateString()}</div>
                         <div class="item-meta">
-                            <span class="seller">👤 ${escapeHtml(item.seller_name)}<br><small>${new Date(item.created_at).toLocaleDateString()}</small></span>
-                            <div>
-                                <button class="contact-btn" onclick="showPhone('${escapeHtml(item.phone)}')">📞 Contact</button>
-                                <a href="https://wa.me/${item.phone.replace(/[^0-9]/g, '')}" target="_blank" class="phone-link" style="display: block; text-align: center; margin-top: 5px;">💬 WhatsApp</a>
-                            </div>
+                            <button class="chat-btn" onclick="startChat('${item.id}', '${escapeHtml(item.title)}', '${item.seller_id}', '${escapeHtml(item.seller_name)}')">💬 Chat & Negotiate</button>
+                            ${item.seller_id === currentUser.id ? `<button class="delete-btn" onclick="deleteItem('${item.id}')">🗑️ Remove</button>` : ''}
                         </div>
                     </div>
                 </div>
             `).join('');
         }
         
-        function getCategoryIcon(category) {
-            const icons = {
-                'Electronics': '📱',
-                'Furniture': '🛋️',
-                'Clothing': '👕',
-                'Books': '📚',
-                'Sports': '⚽',
-                'Other': '📦'
-            };
+        function getIcon(category) {
+            const icons = { Electronics: '📱', Furniture: '🛋️', Clothing: '👕', Books: '📚', Sports: '⚽', Other: '📦' };
             return icons[category] || '📦';
         }
         
-        function filterItems() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const category = document.getElementById('categoryFilter').value;
+        async function deleteItem(itemId) {
+            if (confirm('Remove this listing permanently?')) {
+                await fetch(`/api/listings/${itemId}?seller_id=${currentUser.id}`, { method: 'DELETE' });
+                loadListings();
+            }
+        }
+        
+        async function startChat(itemId, itemTitle, sellerId, sellerName) {
+            if (sellerId === currentUser.id) {
+                alert("You can't chat with yourself");
+                return;
+            }
             
-            const filtered = allItems.filter(item => {
-                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
-                                     (item.description && item.description.toLowerCase().includes(searchTerm));
-                const matchesCategory = !category || item.category === category;
-                return matchesSearch && matchesCategory;
+            const res = await fetch('/api/chats', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    item_id: itemId,
+                    buyer_id: currentUser.id,
+                    buyer_name: currentUser.name,
+                    seller_id: sellerId,
+                    seller_name: sellerName,
+                    item_title: itemTitle
+                })
             });
             
-            displayItems(filtered);
+            const data = await res.json();
+            currentChat = data.chat;
+            openChatModal();
+            await loadMyChats();
         }
         
-        function showPhone(phone) {
-            alert(`📞 Seller's phone: ${phone}\n\nYou can also click WhatsApp to chat directly.`);
+        async function loadMyChats() {
+            const res = await fetch(`/api/chats/${currentUser.id}`);
+            myChats = await res.json();
+            
+            const container = document.getElementById('chatsList');
+            const chatArray = Object.values(myChats);
+            
+            if (chatArray.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 20px; color: #9ca3af;">No chats yet.<br>Message a seller to start!</div>';
+                return;
+            }
+            
+            container.innerHTML = chatArray.map(chat => {
+                const otherPerson = chat.buyer_id === currentUser.id ? chat.seller_name : chat.buyer_name;
+                const lastMsg = chat.messages[chat.messages.length - 1];
+                return `
+                    <div class="chat-item" onclick="openExistingChat('${chat.id}')">
+                        <div class="chat-item-title">${escapeHtml(chat.item_title)}</div>
+                        <div class="chat-item-last">with ${escapeHtml(otherPerson)}</div>
+                        <div class="chat-item-time">${lastMsg ? lastMsg.message.substring(0, 40) : 'No messages yet'}</div>
+                    </div>
+                `;
+            }).join('');
         }
         
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
+        async function openExistingChat(chatId) {
+            currentChat = myChats[chatId];
+            openChatModal();
+        }
+        
+        function openChatModal() {
+            document.getElementById('chatModal').style.display = 'flex';
+            document.getElementById('chatTitle').innerHTML = `💬 ${currentChat.item_title} - Negotiate Price`;
+            loadMessages();
+        }
+        
+        function loadMessages() {
+            const container = document.getElementById('chatMessages');
+            if (!currentChat.messages) currentChat.messages = [];
+            
+            container.innerHTML = currentChat.messages.map(msg => `
+                <div class="message ${msg.sender_id === currentUser.id ? 'message-sent' : 'message-received'}">
+                    <div class="message-bubble">
+                        <strong>${escapeHtml(msg.sender_name)}</strong><br>
+                        ${escapeHtml(msg.message)}<br>
+                        <div class="message-time">${msg.time}</div>
+                    </div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const res = await fetch(`/api/chats/${currentChat.id}/messages`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    sender_id: currentUser.id,
+                    sender_name: currentUser.name,
+                    message: message
+                })
+            });
+            
+            if (res.ok) {
+                const data = await res.json();
+                if (!currentChat.messages) currentChat.messages = [];
+                currentChat.messages.push(data.message);
+                loadMessages();
+                input.value = '';
+                loadMyChats();
+            }
+        }
+        
+        function closeChatModal() {
+            document.getElementById('chatModal').style.display = 'none';
+            currentChat = null;
+        }
+        
+        function showNewChatModal() {
+            const container = document.getElementById('itemsForChat');
+            const myItems = allItems.filter(i => i.seller_id !== currentUser.id && i.status === 'available');
+            if (myItems.length === 0) {
+                container.innerHTML = '<p style="color:#9ca3af;">No items available to chat about.</p>';
+            } else {
+                container.innerHTML = myItems.map(item => `
+                    <div class="item-card" style="margin-bottom: 12px;">
+                        <div class="item-content">
+                            <div class="item-title">${escapeHtml(item.title)}</div>
+                            <div class="item-price">Rs. ${Number(item.price).toLocaleString()}</div>
+                            <button class="chat-btn" onclick="startChat('${item.id}', '${escapeHtml(item.title)}', '${item.seller_id}', '${escapeHtml(item.seller_name)}'); closeNewChatModal();">💬 Message Seller</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('newChatModal').style.display = 'flex';
+        }
+        
+        function closeNewChatModal() {
+            document.getElementById('newChatModal').style.display = 'none';
         }
         
         document.getElementById('sellForm').onsubmit = async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
-            const messageDiv = document.getElementById('message');
-            messageDiv.innerHTML = '<div class="message">⏳ Posting...</div>';
+            formData.append('seller_id', currentUser.id);
             
-            try {
-                const res = await fetch('/add-item', { method: 'POST', body: formData });
-                if (res.ok) {
-                    messageDiv.innerHTML = '<div class="message success">✅ Item posted successfully!</div>';
-                    e.target.reset();
-                    loadListings();
-                    setTimeout(() => { messageDiv.innerHTML = ''; }, 3000);
-                } else {
-                    messageDiv.innerHTML = '<div class="message error">❌ Error posting item</div>';
-                }
-            } catch (err) {
-                messageDiv.innerHTML = '<div class="message error">❌ Error posting item</div>';
+            const res = await fetch('/api/listings', { method: 'POST', body: formData });
+            if (res.ok) {
+                document.getElementById('message').innerHTML = '<span style="color:#10b981;">✅ Item posted! It will stay forever until you remove it.</span>';
+                e.target.reset();
+                loadListings();
+                setTimeout(() => document.getElementById('message').innerHTML = '', 3000);
             }
         };
         
+        function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        
         loadListings();
+        loadMyChats();
+        setInterval(loadMyChats, 3000);
+        setInterval(() => { if (currentChat) loadMessages(); }, 3000);
     </script>
 </body>
 </html>

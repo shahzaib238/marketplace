@@ -1,22 +1,65 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Marketplace</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .card { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+    </style>
 </head>
 <body>
-    <h1>Marketplace Home</h1>
 
-<button onclick="loadMessage()">Load Backend Message</button>
+<h1>Marketplace</h1>
 
-<p id="output"></p>
+<h2>Create Listing</h2>
+
+<form id="form">
+    <input name="title" placeholder="Title"><br>
+    <input name="price" placeholder="Price"><br>
+    <input name="category" placeholder="Category"><br>
+    <input name="location" placeholder="Location"><br>
+    <input name="phone" placeholder="Phone"><br>
+    <input name="seller_name" placeholder="Your Name"><br>
+    <textarea name="description" placeholder="Description"></textarea><br>
+    <button type="submit">Post</button>
+</form>
+
+<hr>
+
+<h2>Listings</h2>
+<div id="listings"></div>
 
 <script>
-    async function loadMessage() {
-        const res = await fetch("/api/message");
-        const data = await res.json();
-        document.getElementById("output").innerText = data.message;
-    }
+async function loadListings() {
+    const res = await fetch('/api/listings');
+    const data = await res.json();
+
+    document.getElementById('listings').innerHTML =
+        data.map(l => `
+            <div class="card">
+                <h3>${l.title}</h3>
+                <p>Price: $${l.price}</p>
+                <p>${l.description}</p>
+                <p>Seller: ${l.seller_name}</p>
+            </div>
+        `).join('');
+}
+
+loadListings();
+
+document.getElementById("form").onsubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    await fetch('/api/listings', {
+        method: 'POST',
+        body: formData
+    });
+
+    loadListings();
+    e.target.reset();
+};
 </script>
 
 </body>

@@ -48,7 +48,6 @@ async def create_listing(
         "seller_id": str(uuid.uuid4())[:8],
         "status": "available"
     }
-
     supabase.table("listings").insert(listing).execute()
 
     return {"success": True}
